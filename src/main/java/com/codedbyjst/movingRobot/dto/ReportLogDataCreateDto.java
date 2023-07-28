@@ -1,6 +1,7 @@
 package com.codedbyjst.movingRobot.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,10 +9,10 @@ import lombok.Setter;
 @Setter
 public class ReportLogDataCreateDto {
 
-    @NotBlank
+    @NotNull
     private Long reportId;
 
-    @NotBlank
+    @NotNull
     private Long roomId;
 
     private Double stepLength;
