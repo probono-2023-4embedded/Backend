@@ -1,8 +1,11 @@
 package com.codedbyjst.movingRobot.controller;
 
+import com.codedbyjst.movingRobot.domain.ReportData;
 import com.codedbyjst.movingRobot.domain.ReportLogData;
+import com.codedbyjst.movingRobot.dto.RecentReportLogDataDto;
 import com.codedbyjst.movingRobot.dto.ReportLogDataCreateDto;
 import com.codedbyjst.movingRobot.dto.ReportLogDataUpdateDto;
+import com.codedbyjst.movingRobot.service.ReportDataService;
 import com.codedbyjst.movingRobot.service.ReportLogDataService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -11,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Tag(name = "reportLogData", description = "레포트 로그 데이터 관련 API")
@@ -18,6 +22,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ReportLogDataController {
 
+    private final ReportDataService reportDataService;
     private final ReportLogDataService reportLogDataService;
 
     @GetMapping("/reportLogData")
@@ -72,5 +77,37 @@ public class ReportLogDataController {
     @Operation(summary = "특정 roomId 레포트 로그 데이터 삭제", description = "특정 roomId의 모든 레포트 로그 데이터를 삭제합니다.")
     public void deleteAllByRoomId(@PathVariable Long roomId) {
         reportLogDataService.deleteAllByRoomId(roomId);
+    }
+
+    @GetMapping("/reportLogData/recent/{userId}/{roomId}")
+    @Operation(summary = "특정 userId, roomId 조합의 가장 최근 데이터를 가져옵니다.")
+    public RecentReportLogDataDto getRecentData(@PathVariable Long userId, Long roomId) {
+        // 가장 최근 레포트를 구합니다.
+        ReportData reportData = reportDataService.findMostRecentByUserId(userId);
+        Long reportId = reportData.getReportId();
+
+        // 해당 레포트의 reportLog들을 구합니다.
+        RecentReportLogDataDto recentReportLogDataDto = new RecentReportLogDataDto();
+        recentReportLogDataDto.setRoomId(roomId);
+        recentReportLogDataDto.setReportId(reportId);
+        List<ReportLogData> reportLogDataList = reportLogDataService.findAllByReportId(reportId);
+        for(ReportLogData reportLogData: reportLogDataList) {
+            if(Objects.equals(reportLogData.getRoomId(), roomId)) {
+                if(reportLogData.getStepLength() != null) {
+                    recentReportLogDataDto.setStepLength(reportLogData.getStepLength());
+                }
+                if(reportLogData.getWateryRisk() != null) {
+                    recentReportLogDataDto.setWateryRisk(reportLogData.getWateryRisk());
+                }
+                if(reportLogData.getXPos() != null) {
+                    recentReportLogDataDto.setXPos(reportLogData.getXPos());
+                }
+                if(reportLogData.getYPos() != null) {
+                    recentReportLogDataDto.setYPos(reportLogData.getYPos());
+                }
+            }
+        }
+
+        return recentReportLogDataDto;
     }
 }

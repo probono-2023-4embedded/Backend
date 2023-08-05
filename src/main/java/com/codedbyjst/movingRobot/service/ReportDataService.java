@@ -109,4 +109,13 @@ public class ReportDataService {
         // 레포트 데이터 전체 제거
         reportDataRepository.deleteAll(reportDataList);
     }
+
+    /**
+     * 특정 userId의 가장 최근 레포트 데이터 반환
+     * @param userId 유저 ID
+     * @return 가장 최근 reportData
+     */
+    public ReportData findMostRecentByUserId(Long userId) {
+        return reportDataRepository.findFirstByUserIdAndEndTimeIsNotNullOrderByEndTimeDesc(userId);
+    }
 }

@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ReportDataRepository extends JpaRepository<ReportData, Long> {
     List<ReportData> findAllByUserId(Long userId);
+    ReportData findFirstByUserIdAndEndTimeIsNotNullOrderByEndTimeDesc(Long userId);
 }
