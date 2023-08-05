@@ -55,7 +55,7 @@ public class ReportDataController {
         reportDataService.deleteByReportId(reportId);
     }
 
-    @DeleteMapping("/reportData/{userId}")
+    @DeleteMapping("/reportData/userId/{userId}")
     @Operation(summary = "특정 userId 레포트 데이터 삭제", description = "특정 userId의 모든 레포트 데이터를 삭제합니다.")
     public void deleteAllByUserId(@PathVariable Long userId) {
         reportDataService.deleteAllByUserId(userId);

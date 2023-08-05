@@ -31,7 +31,7 @@ public class RoomDataController {
         return roomDataService.findByRoomId(roomId);
     }
 
-    @GetMapping("/roomData/{userId}")
+    @GetMapping("/roomData/userId/{userId}")
     @Operation(summary = "특정 userId 방 데이터 조회", description = "특정 userId의 모든 방 데이터를 조회합니다.")
     public List<RoomData> findAllByUserId(@PathVariable Long userId) {
         return roomDataService.findAllByUserId(userId);
@@ -55,7 +55,7 @@ public class RoomDataController {
         roomDataService.deleteByRoomId(roomId);
     }
 
-    @DeleteMapping("/roomData/{userId}")
+    @DeleteMapping("/roomData/userId/{userId}")
     @Operation(summary = "특정 userId 방 데이터 삭제", description = "특정 userId의 모든 방 데이터를 삭제합니다.")
     public void deleteAllByUserId(@PathVariable Long userId) {
         roomDataService.deleteAllByUserId(userId);

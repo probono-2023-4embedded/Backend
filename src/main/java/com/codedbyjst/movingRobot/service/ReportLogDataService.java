@@ -64,8 +64,9 @@ public class ReportLogDataService {
         reportLogData.setReportId(reportLogDataCreateDto.getReportId());
         reportLogData.setRoomId(reportLogDataCreateDto.getRoomId());
         reportLogData.setStepLength(reportLogDataCreateDto.getStepLength());
-        reportLogData.setWateryPixelCnt(reportLogDataCreateDto.getWateryPixelCnt());
-        reportLogData.setObjectInfo(reportLogDataCreateDto.getObjectInfo());
+        reportLogData.setWateryRisk(reportLogDataCreateDto.getWateryRisk());
+        reportLogData.setXPos(reportLogDataCreateDto.getXPos());
+        reportLogData.setYPos(reportLogDataCreateDto.getYPos());
 
         reportLogDataRepository.save(reportLogData);
 
@@ -93,11 +94,14 @@ public class ReportLogDataService {
         if(reportLogDataUpdateDto.getStepLength() != null) {
             reportLogData.setStepLength(reportLogDataUpdateDto.getStepLength());
         }
-        if(reportLogDataUpdateDto.getWateryPixelCnt() != null) {
-            reportLogData.setWateryPixelCnt(reportLogDataUpdateDto.getWateryPixelCnt());
+        if(reportLogDataUpdateDto.getWateryRisk() != null) {
+            reportLogData.setWateryRisk(reportLogDataUpdateDto.getWateryRisk());
         }
-        if(reportLogDataUpdateDto.getObjectInfo() != null) {
-            reportLogData.setObjectInfo(reportLogDataUpdateDto.getObjectInfo());
+        if(reportLogDataUpdateDto.getXPos() != null) {
+            reportLogData.setXPos(reportLogDataUpdateDto.getXPos());
+        }
+        if(reportLogDataUpdateDto.getYPos() != null) {
+            reportLogData.setYPos(reportLogDataUpdateDto.getYPos());
         }
 
         return reportLogData;

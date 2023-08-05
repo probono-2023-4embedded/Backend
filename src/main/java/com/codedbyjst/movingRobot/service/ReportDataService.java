@@ -51,7 +51,7 @@ public class ReportDataService {
     public ReportData add(ReportDataDto reportDataDto) {
         ReportData reportData = new ReportData();
 
-        reportData.setUserId(reportData.getUserId());
+        reportData.setUserId(reportDataDto.getUserId());
         reportData.setStartTime(reportDataDto.getStartTime());
         reportData.setEndTime(reportDataDto.getEndTime());
 

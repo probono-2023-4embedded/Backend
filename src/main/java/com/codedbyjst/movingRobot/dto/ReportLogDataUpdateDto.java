@@ -14,7 +14,9 @@ public class ReportLogDataUpdateDto {
 
     private Double stepLength;
 
-    private Integer wateryPixelCnt;
+    private String wateryRisk;
 
-    private String objectInfo;
+    private Double xPos;
+
+    private Double yPos;
 }
