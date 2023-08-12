@@ -19,4 +19,8 @@ public class ReportLogDataUpdateDto {
     private Double xPos;
 
     private Double yPos;
+
+    private Double diffXPos;
+
+    private Double diffYPos;
 }

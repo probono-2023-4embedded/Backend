@@ -27,4 +27,8 @@ public class ReportLogData {
     private Double xPos;
 
     private Double yPos;
+
+    private Double diffXPos;
+
+    private Double diffYPos;
 }

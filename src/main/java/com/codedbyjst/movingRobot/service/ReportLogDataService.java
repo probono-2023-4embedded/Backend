@@ -67,6 +67,8 @@ public class ReportLogDataService {
         reportLogData.setWateryRisk(reportLogDataCreateDto.getWateryRisk());
         reportLogData.setXPos(reportLogDataCreateDto.getXPos());
         reportLogData.setYPos(reportLogDataCreateDto.getYPos());
+        reportLogData.setDiffXPos(reportLogDataCreateDto.getDiffXPos());
+        reportLogData.setDiffYPos(reportLogDataCreateDto.getDiffYPos());
 
         reportLogDataRepository.save(reportLogData);
 
@@ -102,6 +104,12 @@ public class ReportLogDataService {
         }
         if(reportLogDataUpdateDto.getYPos() != null) {
             reportLogData.setYPos(reportLogDataUpdateDto.getYPos());
+        }
+        if(reportLogDataUpdateDto.getDiffXPos() != null) {
+            reportLogData.setDiffXPos(reportLogData.getXPos());
+        }
+        if(reportLogDataUpdateDto.getDiffYPos() != null) {
+            reportLogData.setDiffYPos(reportLogData.getYPos());
         }
 
         return reportLogData;

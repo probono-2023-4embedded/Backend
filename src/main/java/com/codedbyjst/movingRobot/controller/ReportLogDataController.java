@@ -2,7 +2,7 @@ package com.codedbyjst.movingRobot.controller;
 
 import com.codedbyjst.movingRobot.domain.ReportData;
 import com.codedbyjst.movingRobot.domain.ReportLogData;
-import com.codedbyjst.movingRobot.dto.RecentReportLogDataDto;
+import com.codedbyjst.movingRobot.dto.ReportLogDataRecentDto;
 import com.codedbyjst.movingRobot.dto.ReportLogDataCreateDto;
 import com.codedbyjst.movingRobot.dto.ReportLogDataUpdateDto;
 import com.codedbyjst.movingRobot.service.ReportDataService;
@@ -81,33 +81,39 @@ public class ReportLogDataController {
 
     @GetMapping("/reportLogData/recent/{userId}/{roomId}")
     @Operation(summary = "특정 userId, roomId 조합의 가장 최근 데이터를 가져옵니다.")
-    public RecentReportLogDataDto getRecentData(@PathVariable Long userId, Long roomId) {
+    public ReportLogDataRecentDto getRecentData(@PathVariable Long userId, Long roomId) {
         // 가장 최근 레포트를 구합니다.
         ReportData reportData = reportDataService.findMostRecentByUserId(userId);
         Long reportId = reportData.getReportId();
 
         // 해당 레포트의 reportLog들을 구합니다.
-        RecentReportLogDataDto recentReportLogDataDto = new RecentReportLogDataDto();
-        recentReportLogDataDto.setRoomId(roomId);
-        recentReportLogDataDto.setReportId(reportId);
+        ReportLogDataRecentDto reportLogDataRecentDto = new ReportLogDataRecentDto();
+        reportLogDataRecentDto.setRoomId(roomId);
+        reportLogDataRecentDto.setReportId(reportId);
         List<ReportLogData> reportLogDataList = reportLogDataService.findAllByReportId(reportId);
         for(ReportLogData reportLogData: reportLogDataList) {
             if(Objects.equals(reportLogData.getRoomId(), roomId)) {
                 if(reportLogData.getStepLength() != null) {
-                    recentReportLogDataDto.setStepLength(reportLogData.getStepLength());
+                    reportLogDataRecentDto.setStepLength(reportLogData.getStepLength());
                 }
                 if(reportLogData.getWateryRisk() != null) {
-                    recentReportLogDataDto.setWateryRisk(reportLogData.getWateryRisk());
+                    reportLogDataRecentDto.setWateryRisk(reportLogData.getWateryRisk());
                 }
                 if(reportLogData.getXPos() != null) {
-                    recentReportLogDataDto.setXPos(reportLogData.getXPos());
+                    reportLogDataRecentDto.setXPos(reportLogData.getXPos());
                 }
                 if(reportLogData.getYPos() != null) {
-                    recentReportLogDataDto.setYPos(reportLogData.getYPos());
+                    reportLogDataRecentDto.setYPos(reportLogData.getYPos());
+                }
+                if(reportLogData.getDiffXPos() != null) {
+                    reportLogDataRecentDto.setDiffXPos(reportLogData.getDiffXPos());
+                }
+                if(reportLogData.getDiffYPos() != null) {
+                    reportLogDataRecentDto.setDiffYPos(reportLogData.getDiffYPos());
                 }
             }
         }
 
-        return recentReportLogDataDto;
+        return reportLogDataRecentDto;
     }
 }
