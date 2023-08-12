@@ -37,6 +37,12 @@ public class ReportDataController {
         return reportDataService.findAllByUserId(userId);
     }
 
+    @GetMapping("/reportData/recent/{userId}")
+    @Operation(summary = "특정 userId의 가장 최근 레포트 데이터 조회", description = "특정 userId의 가장 최근 레포트 데이터를 조회합니다.")
+    public ReportData findMostRecentByUserId(@PathVariable Long userId) {
+        return reportDataService.findMostRecentByUserId(userId);
+    }
+
     @PostMapping("/reportData")
     @Operation(summary = "레포트 데이터 추가", description = "레포트 데이터를 추가합니다.")
     public ReportData add(@RequestBody @Valid ReportDataDto reportDataDto) {
