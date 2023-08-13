@@ -13,7 +13,7 @@ public class ReportDataDto {
     @NotNull
     private Long userId;
 
-    private Timestamp startTime;
+    private String startTime;
 
-    private Timestamp endTime;
+    private String endTime;
 }

@@ -21,8 +21,7 @@ public class ReportData {
     @Column(nullable = false)
     private Long userId;
 
-    @CreationTimestamp
-    private Timestamp startTime;
+    private String startTime;
 
-    private Timestamp endTime;
+    private String endTime;
 }
